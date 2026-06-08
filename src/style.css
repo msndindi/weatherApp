@@ -1,0 +1,26 @@
+body{
+    background:#bbe4e9 ;
+    font-family: 'Iosevka Charon', monospace;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.weather-app {
+    background: #fff;
+    margin: 0 auto;
+    max-width: 600px;
+    border-radius : 20px;
+    padding: 30px;
+    box-shadow :0 30px 50px rgba(65, 50, 100, 0.08)
+
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border:none;
+    border-inline: none;
+    background-color:none;
+}
