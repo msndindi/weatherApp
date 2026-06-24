@@ -26,4 +26,4 @@ let searchElement = document.querySelector("#search-form");
 searchElement.addEventListener("submit", handleSearchSubmission);
 
 
-searchCity("Paris"); // Default city when the page loads
+searchCity("Oslo"); // Default city when the page loads
