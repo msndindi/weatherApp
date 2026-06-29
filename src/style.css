@@ -66,11 +66,18 @@ a {
   font-weight: 500;
 }
 
+
+
 .weather-app-details strong {
   color: #f65282;
 }
 
 strong {
+  font-weight: bold;
+}
+
+.time-display {
+  color: #273342;
   font-weight: bold;
 }
 
