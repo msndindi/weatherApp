@@ -15,6 +15,8 @@ function refreshWeatherData(response) {
   let date = new Date(response.data.time * 1000);
   let timeElement = document.querySelector("#time");
   timeElement.innerHTML = formatDate(date);
+  let iconElement = document.querySelector("#icon");
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" alt="Weather Icon">`;
   console.log(response.data);
 }
 
