@@ -12,36 +12,58 @@ function refreshWeatherData(response) {
   windElement.innerHTML = `${response.data.wind.speed}km/h`;
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = response.data.condition.description;
-  let date = new Date(response.data.time * 1000);
-  let timeElement = document.querySelector("#time");
-  timeElement.innerHTML = formatDate(date);
+  // let date = new Date(response.data.time * 1000);
+  // let timeElement = document.querySelector("#time");
+  // timeElement.innerHTML = formatDate(date);
   let iconElement = document.querySelector("#icon");
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" alt="Weather Icon">`;
   console.log(response.data);
+ 
+
+  getCityLocalTime(response.data.coordinates);
 }
 
-function formatDate(date) {
+
+
+// function formatDate(date) {
   
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let day = days[date.getDay()];
-  return `${day} ${hours}:${minutes} ,`;
+//   let hours = date.getHours();
+//   if (hours < 10) {
+//     hours = `0${hours}`;
+//   }
+//   let minutes = date.getMinutes();
+//   if (minutes < 10) {
+//     minutes = `0${minutes}`;
+//   }
+//   let days = [
+//     "Sunday",
+//     "Monday",
+//     "Tuesday",
+//     "Wednesday",
+//     "Thursday",
+//     "Friday",
+//     "Saturday",
+//   ];
+//   let day = days[date.getDay()];
+//   return `${day} ${hours}:${minutes} ,`;
+
+
+
+function displayCityLocalTime(response) {
+  let timeElement = document.querySelector("#time");
+  timeElement.innerHTML = `${response.data.dayOfWeek} ${response.data.time}`;
+
+
+  console.log(response.data);
 }
+
+function getCityLocalTime(coordinates) {
+  let timeApiUrl = `https://timeapi.io/api/time/current/coordinate?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`;
+  axios.get(timeApiUrl).then(displayCityLocalTime);
+}
+
+
+
 
 
 
