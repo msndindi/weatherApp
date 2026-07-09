@@ -85,4 +85,7 @@ function handleSearchSubmission(event) {
 let searchElement = document.querySelector("#search-form");
 searchElement.addEventListener("submit", handleSearchSubmission);
 
+
+
+
 searchCity("Oslo"); // Default city when the page loads
