@@ -19,6 +19,7 @@ function refreshWeatherData(response) {
   console.log(response.data);
 
   getCityLocalTime(response.data.coordinates);
+  getForecast(response.data.city);
 }
 
 // function formatDate(date) {
@@ -72,7 +73,17 @@ function handleSearchSubmission(event) {
 let searchElement = document.querySelector("#search-form");
 searchElement.addEventListener("submit", handleSearchSubmission);
 
-function displayForecast() {
+function getForecast(city) {
+  let apiKey = "00fd2534b306ca4ac44778fc7b36o08t";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+  // console.log(apiUrl);
+
+
+}
+
+function displayForecast(response) {
+  console.log(response.data);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   let forecastHtml = "";
@@ -99,4 +110,4 @@ function displayForecast() {
 }
 
 searchCity("Oslo"); // Default city when the page loads
-displayForecast(); // Call the function to display the forecast
+// getForecast("Oslo"); // Fetch forecast for the default city
