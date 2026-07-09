@@ -1,4 +1,3 @@
-
 function refreshWeatherData(response) {
   console.log(response.data);
   let temperatureElement = document.querySelector("#temperature");
@@ -18,15 +17,12 @@ function refreshWeatherData(response) {
   let iconElement = document.querySelector("#icon");
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" alt="Weather Icon">`;
   console.log(response.data);
- 
 
   getCityLocalTime(response.data.coordinates);
 }
 
-
-
 // function formatDate(date) {
-  
+
 //   let hours = date.getHours();
 //   if (hours < 10) {
 //     hours = `0${hours}`;
@@ -47,12 +43,9 @@ function refreshWeatherData(response) {
 //   let day = days[date.getDay()];
 //   return `${day} ${hours}:${minutes} ,`;
 
-
-
 function displayCityLocalTime(response) {
   let timeElement = document.querySelector("#time");
   timeElement.innerHTML = `${response.data.dayOfWeek} ${response.data.time}`;
-
 
   console.log(response.data);
 }
@@ -61,12 +54,6 @@ function getCityLocalTime(coordinates) {
   let timeApiUrl = `https://timeapi.io/api/time/current/coordinate?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`;
   axios.get(timeApiUrl).then(displayCityLocalTime);
 }
-
-
-
-
-
-
 
 function searchCity(city) {
   let apiKey = "00fd2534b306ca4ac44778fc7b36o08t";
@@ -85,7 +72,31 @@ function handleSearchSubmission(event) {
 let searchElement = document.querySelector("#search-form");
 searchElement.addEventListener("submit", handleSearchSubmission);
 
+function displayForecast() {
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+  let forecastHtml = "";
 
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+    <div class="weather-forecast-day">
+        <div class="weather-forecast-date">${day}</div>
+        <div class="weather-forecast-icon">🌤️</div>
+        <div class="weather-forecast-temperatures">
+          <div class="weather-forecast-temperature">
+            <strong>15º</strong>
+          </div>
+          <div class="weather-forecast-temperature">9º</div>
+        </div>
+      </div>
+      `;
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
 
 searchCity("Oslo"); // Default city when the page loads
+displayForecast(); // Call the function to display the forecast
