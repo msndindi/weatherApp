@@ -113,6 +113,11 @@ strong {
   line-height: 24px;
   font-weight: 500;
   margin-bottom: 10px;
+ 
+
+  
+
+  
 }
 
 .weather-app-date {
@@ -146,8 +151,9 @@ strong {
 
 .weather-forecast {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 30px;
+
 
 }
 
