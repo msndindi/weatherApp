@@ -80,9 +80,8 @@ function getForecast(city) {
   // console.log(apiUrl);
 }
 
-function displayForecast(response) {
-  console.log(response.data);
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+function displayForecast() {
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   // loop through response.data and get the day of the week for each forecast day
 
   let forecastHtml = "";
@@ -90,18 +89,15 @@ function displayForecast(response) {
   days.forEach(function (day) {
     forecastHtml =
       forecastElement +
-     `
+      `
     <div class="weather-forecast-day">
         <div class="weather-forecast-date">${day}</div>
-        <div class="weather-forecast-icon">
-        <img src="${day.condition.icon_url}"  />
-    
-        </div>
+        <div class="weather-forecast-icon">🌥️ </div>
         <div class="weather-forecast-temperatures">
           <div class="weather-forecast-temperature">
-            <strong>${Math.round(day.temperature.maximum)}°</strong>
+            <strong>15°</strong>
           </div>
-          <div class="weather-forecast-temperature">${Math.round(day.temperature.minimum)}°</div>
+          <div class="weather-forecast-temperature">9°</div>
         </div>
       </div>
       `;
@@ -112,3 +108,4 @@ function displayForecast(response) {
 }
 
 searchCity("Oslo"); // Default city when the page loads
+displayForecast(); // Call displayForecast to show the forecast for the default city
