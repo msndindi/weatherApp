@@ -115,6 +115,14 @@ strong {
   margin-bottom: 10px;
 }
 
+.weather-app-date {
+    text-align: center;
+    color: rgba(39, 33, 66, 0.4);
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
 .weather-forecast-icon {
   width: 88px;
   height: 88px;
