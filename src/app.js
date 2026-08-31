@@ -129,30 +129,31 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHtml;
 }
 
-function displayForecastDemo() {
-  // Render demo forecast (no API required)
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
-  let forecastElement = document.querySelector("#forecast");
-  if (!forecastElement) return;
 
-  let forecastHtml = "";
-  days.forEach(function (day) {
-    forecastHtml += `
-      <div class="weather-forecast-day">
-        <div class="weather-forecast-date">${day}</div>
-        <div class="weather-forecast-icon">🌥️</div>
-        <div class="weather-forecast-temperatures">
-          <div class="weather-forecast-temperature">
-            <strong>15°</strong>
-          </div>
-          <div class="weather-forecast-temperature">9°</div>
-        </div>
-      </div>
-    `;
-  });
+// function displayForecastDemo() {
+//   // Render demo forecast (no API required)
+//   let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+//   let forecastElement = document.querySelector("#forecast");
+//   if (!forecastElement) return;
 
-  forecastElement.innerHTML = forecastHtml;
-}
+//   let forecastHtml = "";
+//   days.forEach(function (day) {
+//     forecastHtml += `
+//       <div class="weather-forecast-day">
+//         <div class="weather-forecast-date">${day}</div>
+//         <div class="weather-forecast-icon">🌥️</div>
+//         <div class="weather-forecast-temperatures">
+//           <div class="weather-forecast-temperature">
+//             <strong>15°</strong>
+//           </div>
+//           <div class="weather-forecast-temperature">9°</div>
+//         </div>
+//       </div>
+//     `;
+//   });
+
+//   forecastElement.innerHTML = forecastHtml;
+// }
 
 searchCity("Oslo"); // Default city when the page loads
-displayForecastDemo(); // Show demo forecast first
+// displayForecastDemo(); // Show demo forecast first
