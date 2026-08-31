@@ -80,19 +80,67 @@ function getForecast(city) {
   // console.log(apiUrl);
 }
 
-function displayForecast() {
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
-  // loop through response.data and get the day of the week for each forecast day
+function formatForecastDay(timestamp) {
+  // timestamp can be seconds (number) or an ISO string
+  let date;
+  if (typeof timestamp === "number") {
+    date = new Date(timestamp * 1000);
+  } else {
+    date = new Date(timestamp);
+  }
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[date.getDay()];
+}
+
+function displayForecast(response) {
+  // Accept the forecast API response and build HTML for the first 5 days
+  let forecastElement = document.querySelector("#forecast");
+  if (!forecastElement) return;
 
   let forecastHtml = "";
 
+  let daily = response?.data?.daily || [];
+  daily.slice(0, 5).forEach(function (day) {
+    let dayName = formatForecastDay(day.time || day.datetime || day.date);
+    let maxTemp = Math.round(
+      day.temperature?.maximum ?? day.temperature?.max ?? 15,
+    );
+    let minTemp = Math.round(
+      day.temperature?.minimum ?? day.temperature?.min ?? 9,
+    );
+    let iconUrl = day.condition?.icon_url || "";
+
+    forecastHtml += `
+      <div class="weather-forecast-day">
+        <div class="weather-forecast-date">${dayName}</div>
+        <div class="weather-forecast-icon">${
+          iconUrl ? `<img src="${iconUrl}" alt="icon">` : "🌥️"
+        }</div>
+        <div class="weather-forecast-temperatures">
+          <div class="weather-forecast-temperature">
+            <strong>${maxTemp}°</strong>
+          </div>
+          <div class="weather-forecast-temperature">${minTemp}°</div>
+        </div>
+      </div>
+    `;
+  });
+
+  forecastElement.innerHTML = forecastHtml;
+}
+
+function displayForecastDemo() {
+  // Render demo forecast (no API required)
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastElement = document.querySelector("#forecast");
+  if (!forecastElement) return;
+
+  let forecastHtml = "";
   days.forEach(function (day) {
-    forecastHtml =
-      forecastElement +
-      `
-    <div class="weather-forecast-day">
+    forecastHtml += `
+      <div class="weather-forecast-day">
         <div class="weather-forecast-date">${day}</div>
-        <div class="weather-forecast-icon">🌥️ </div>
+        <div class="weather-forecast-icon">🌥️</div>
         <div class="weather-forecast-temperatures">
           <div class="weather-forecast-temperature">
             <strong>15°</strong>
@@ -100,12 +148,11 @@ function displayForecast() {
           <div class="weather-forecast-temperature">9°</div>
         </div>
       </div>
-      `;
+    `;
   });
 
-  let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHtml;
 }
 
 searchCity("Oslo"); // Default city when the page loads
-displayForecast(); // Call displayForecast to show the forecast for the default city
+displayForecastDemo(); // Show demo forecast first
